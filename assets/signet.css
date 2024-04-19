@@ -1,0 +1,5 @@
+.thb-full-menu .sub-menu ul {
+  display: flex;
+  flex-wrap: wrap;
+  height: 0;
+}

@@ -1,0 +1,272 @@
+{% assign counter = 0 %}
+{% for vendor in shop.vendors %}
+  {% assign counter = counter | plus: 1 %}
+{% endfor %}
+
+<style>
+  #signetCollections {
+    /* display: none; */
+  }
+
+  .container {
+    position: relative;
+  }
+
+  .sidebarCollections {
+    position: fixed;
+    left: -9999px;
+    top: 0;
+    height: 100svh;
+    width: 100%;
+    background-color: #2c3b2e;
+    transition: left 0.3s;
+    opacity: 0.97;
+    z-index: 9999;
+    overflow: auto;
+  }
+
+  .sidebarCollections.show {
+    left: 0; /* Show sidebar when toggled */
+  }
+
+  .sidebarCollections.show#sidebarCollections .navigation__search {
+    margin-top: 0;
+  }
+
+  .sidebarCollections.show#sidebarCollections .navigation__search .input-group--underline .icon {
+    fill: #fff;
+  }
+
+  .sidebarCollections.show#sidebarCollections .navigation__search .input-group--underline {
+    border-bottom: 2px solid #fff;
+  }
+
+  .sidebarCollections.show#sidebarCollections .navigation__search ::placeholder {
+    /* Most modern browsers support this now. */
+    color: #cacaca;
+  }
+
+  .sidebarCollections ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    /* height: 60vh; */
+    -webkit-columns: 60px 1;
+    -moz-columns: 60px 1;
+    columns: 60px 1;
+    -moz-column-fill: auto;
+    /* column-fill: auto; */
+    columns: 1;
+    -webkit-columns: 1;
+    -moz-columns: 1;
+    padding: 50px 20px 20px 8%;
+  }
+
+  .sidebarCollections ul li {
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .sidebarCollections ul li a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .collection-btn-toggle {
+    position: fixed;
+    left: -10px;
+    top: 50%;
+    background-color: #052719;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 9999;
+    transform: rotate(90deg);
+    transition: left 0.3s;
+    font-size: 12px;
+  }
+
+  .hideSidebar {
+    left: -9999px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  #closeSideBar {
+    position: fixed;
+    right: 40px;
+    top: 20px;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #searchAndFilter {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #filterVendor {
+    margin-top: 70px;
+    width: 50%;
+  }
+
+  @media only screen and (min-width: 750px) {
+    .sidebarCollections ul {
+      -webkit-columns: 60px 3;
+      -moz-columns: 60px 3;
+      columns: 60px 3;
+      -moz-column-fill: auto;
+      /* column-fill: auto; */
+      columns: 3;
+      -webkit-columns: 3;
+      -moz-columns: 3;
+    }
+  }
+
+  @media only screen and (min-width: 1025px) {
+    .sidebarCollections ul {
+      -webkit-columns: 60px 4;
+      -moz-columns: 60px 4;
+      columns: 60px 4;
+      -moz-column-fill: auto;
+      /* column-fill: auto; */
+      columns: 4;
+      -webkit-columns: 4;
+      -moz-columns: 4;
+    }
+
+    #searchAndFilter {
+      flex-direction: row;
+      /* width: 60%; */
+    }
+  }
+</style>
+
+<div id="signetCollections">
+  <button class="collection-btn-toggle hideSidebar" onclick="toggleSidebar()" id="scroll-nav">
+    <svg
+      fill="#ffffff"
+      height="15px"
+      width="15px"
+      version="1.1"
+      id="Layer_1"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 0 330 330"
+      xml:space="preserve"
+    >
+      <path id="XMLID_224_" d="M325.606,229.393l-150.004-150C172.79,76.58,168.974,75,164.996,75c-3.979,0-7.794,1.581-10.607,4.394
+      	l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393
+      	C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z"/>
+    </svg>
+    <br>
+    Brands
+  </button>
+  <div class="sidebarCollections" id="sidebarCollections">
+    <!-- Collection by Brand retrieval -->
+    <div id="closeSideBar" class="hidden" onclick="toggleSidebar()">X</div>
+
+    <div id="searchAndFilter">
+      <!-- Main Search -->
+      {% comment  %} {% include 'search-bar', animate: true, disableTab: true %} {% endcomment %}
+      <!-- Quick Filter -->
+      <input type="text" id="filterVendor" onkeyup="filterVendor()" placeholder="Filter the Brands..">
+    </div>
+
+    <ul id="signetVendors" class="vendor-list block-grid three-up mobile one-up">
+      {% for product_vendor in shop.vendors %}
+        {% assign its_a_match = false %}
+        {% capture my_collection_handle %} {{ product_vendor | handleize | strip | escape  }} {% endcapture %}
+        {% assign my_collection_handle_stripped = my_collection_handle | strip | escape %}
+
+        {% for collection in collections %}
+          {% if my_collection_handle_stripped == collection.handle %}
+            {% assign its_a_match = true %}
+          {% endif %}
+        {% endfor %}
+
+        {% if its_a_match %}
+          <li class="vendor-list-item">
+            <a href="/collections/{{ product_vendor | handleize }}">{{ product_vendor }}</a>
+          </li>
+        {% else %}
+          <li class="vendor-list-item">{{ product_vendor | link_to_vendor }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+  </div>
+</div>
+
+<script>
+  function toggleSidebar() {
+    let sidebar = document.getElementById('sidebarCollections');
+    let closeBtn = document.getElementById('closeSideBar');
+    let body = document.body;
+    sidebar.classList.toggle('show');
+    closeBtn.classList.toggle('hidden');
+
+    document.getElementById('filterVendor').value = '';
+    filterVendor();
+
+    if (sidebar.scrollTop !== 0) {
+      sidebar.scrollTop = 0;
+    }
+
+    if (body.style.overflow === 'hidden') {
+      body.style.overflow = 'auto';
+    } else {
+      body.style.overflow = 'hidden';
+    }
+  }
+
+  function filterVendor() {
+    // Declare variables
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById('filterVendor');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById('signetVendors');
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+      a = li[i].getElementsByTagName('a')[0];
+      txtValue = a.textContent || a.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        li[i].style.display = '';
+      } else {
+        li[i].style.display = 'none';
+      }
+    }
+  }
+
+  let lastScrollTop = 0;
+  window.addEventListener(
+    'scroll',
+    function () {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (currentScroll < lastScrollTop) {
+        // Scrolling down
+        document.getElementById('scroll-nav').classList.add('hideSidebar');
+      } else {
+        // Scrolling up
+        document.getElementById('scroll-nav').classList.remove('hideSidebar');
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
+    },
+    false
+  );
+</script>
