@@ -89,7 +89,9 @@
 		{% render 'product-drawer' %}
 		{% render 'search-drawer' %}
 		<div class="click-capture"></div>
-        {% render 'signetbrands' %}
+		{% if if template contains "product" %}
+        	{% render 'signetbrands' %}
+		{% endif %}
 	</div>
 
 	{{ 'vendor.min.js' | asset_url | script_tag }}
