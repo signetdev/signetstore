@@ -263,7 +263,7 @@
     var scrollButton = document.getElementById("scroll-nav");
     var footer = document.getElementById("footer").getBoundingClientRect();
 
-    if (footer.bottom >= window.innerHeight) {
+    if (footer.top >= window.innerHeight) {
         scrollButton.classList.remove("hidden");
     } else {
         scrollButton.classList.add("hidden");
