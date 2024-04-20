@@ -259,7 +259,18 @@
     }
   }
 
-  let lastScrollTop = 0;
+  window.addEventListener("scroll", function () {
+    var scrollButton = document.getElementById("scroll-nav");
+    var footer = document.getElementById("footer").getBoundingClientRect();
+
+    if (footer.bottom >= window.innerHeight) {
+        scrollButton.classList.remove("hidden");
+    } else {
+        scrollButton.classList.add("hidden");
+    }
+  });
+
+  {% comment %} let lastScrollTop = 0;
   window.addEventListener(
     'scroll',
     function () {
@@ -275,5 +286,5 @@
       lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // For Mobile or negative scrolling
     },
     false
-  );
+  ); {% endcomment %}
 </script>
