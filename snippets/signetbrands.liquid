@@ -92,6 +92,10 @@
     font-size: 12px;
   }
 
+  .collection-btn-toggle.hideSidebar {
+    display: none;
+  }
+
   {% comment %} .hideSidebar {
     left: -9999px;
   } {% endcomment %}
@@ -265,9 +269,9 @@
     var footer = document.getElementById("footer").getBoundingClientRect();
 
     if (footer.top >= window.innerHeight && header.classList.contains('is-sticky')) {
-        scrollButton.classList.remove("hidden");
+        scrollButton.classList.remove("hideSidebar");
     } else {
-        scrollButton.classList.add("hidden");
+        scrollButton.classList.add("hideSidebar");
     }
   });
 
