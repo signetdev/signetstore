@@ -92,7 +92,7 @@
     font-size: 12px;
   }
 
-  .collection-btn-toggle.hideSidebar {
+  .collection-btn-toggle.hideScrollnav {
     display: none;
   }
 
@@ -166,7 +166,7 @@
 </style>
 
 <div id="signetCollections">
-  <button class="collection-btn-toggle hideSidebar" onclick="toggleSidebar()" id="scroll-nav">
+  <button class="collection-btn-toggle hideScrollnav" onclick="toggleSidebar()" id="scroll-nav">
     <svg
       fill="#ffffff"
       height="15px"
@@ -269,9 +269,9 @@
     var footer = document.getElementById("footer").getBoundingClientRect();
 
     if (footer.top >= window.innerHeight && header.classList.contains('is-sticky')) {
-        scrollButton.classList.remove("hideSidebar");
+        scrollButton.classList.remove("hideScrollnav");
     } else {
-        scrollButton.classList.add("hideSidebar");
+        scrollButton.classList.add("hideScrollnav");
     }
   });
 
