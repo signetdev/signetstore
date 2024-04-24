@@ -3,3 +3,10 @@
   flex-wrap: wrap;
   height: 0;
 }
+
+.announcement-bar,
+#header,
+#header .full-menu,
+#header .full-menu .thb-full-menu{
+  font-family: "Archivo Narrow", sans-serif;
+}
