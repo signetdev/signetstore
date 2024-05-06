@@ -14,9 +14,42 @@ a,breadcrumbs,
   font-family: "Archivo Narrow", sans-serif;
 }
 
+.thb-full-menu li.menu-item-has-children:hover > .sub-menu:not(.mega-menu-container) {
+  min-width: 100%;
+  width: 100%;
+  left: 0;
+
+  flex-wrap: wrap;
+  display: flex;
+  padding: 50px 100px;
+
+  z-index: 9999;
+}
+
+@media only screen and (min-width: 768px) {
+ .thb-full-menu li.menu-item-has-children:hover > .sub-menu:not(.mega-menu-container) li {
+    flex: 1 0 25%;
+    padding: 7px 0;
+  } 
+}
+
+@media only screen and (min-width: 1500px) {
+ .thb-full-menu li.menu-item-has-children:hover > .sub-menu:not(.mega-menu-container) li {
+    flex: 1 0 15%; 
+  } 
+}
+
+
+
 .thb-full-menu li.menu-item-has-children:hover > .sub-menu {
   visibility: visible;
   opacity: 1; 
   max-height: 80svh; 
   overflow: auto; 
 }
+
+.thb-full-menu li.menu-item-has-children {
+  position: unset;
+}
+
+
