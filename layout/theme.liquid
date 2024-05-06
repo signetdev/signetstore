@@ -105,11 +105,21 @@
 			gsap.registerPlugin(ScrollTrigger);
 		</script>
 	{% endif %}
-	{% if settings.enable_quick_view or settings.enable_quick_add %}
-		{{ 'product.js' | asset_url | script_tag }}
-	{% endif %}
 	{{ 'slideshow.js' | asset_url | script_tag }}
 	{{ 'app.js' | asset_url | script_tag }}
+	{%- liquid
+		assign add_product_js = false
+		if settings.enable_quick_view or settings.enable_quick_add
+			assign add_product_js = true
+		endif
+
+		if cart != empty and settings.cart_recommendations
+			assign add_product_js = true
+		endif
+	-%}	
+	{% if add_product_js %}
+		<script src="{{ 'product.js' | asset_url }}" defer="defer"></script>
+	{% endif %}
 	<script type="module" src="{{ 'scroll-shadow.js' | asset_url }}" defer="defer"></script>
 	<script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
 	{%- if request.design_mode -%}

@@ -2406,9 +2406,7 @@ h6,
       z-index: 2; }
       .thb-full-menu li.menu-item-has-children:hover > .sub-menu {
         visibility: visible;
-        opacity: 1; 
-        max-height: 80svh; 
-        overflow: auto; }
+        opacity: 1; }
       .thb-full-menu li.menu-item-has-children:hover:before {
         content: attr(data-item-title);
         position: absolute;

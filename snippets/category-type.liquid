@@ -1,0 +1,19 @@
+<ul id="signetType" class="vendor-list block-grid three-up mobile one-up">
+    {% for product_type in shop.types %}
+      {% assign its_a_match = false %}
+      {% capture my_collection_handle %} {{ product_type | handleize | strip | escape  }} {% endcapture %}
+      {% assign my_collection_handle_stripped = my_collection_handle | strip | escape %}
+
+      {% for collection in collections %}
+        {% if my_collection_handle_stripped == collection.handle %}
+          {% assign its_a_match = true %}
+        {% endif %}
+      {% endfor %}
+
+      {% if its_a_match %}
+        <li class="type-list-item">
+          <a href="/collections/{{ product_type | handleize }}">{{ product_type }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>

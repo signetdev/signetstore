@@ -22,11 +22,13 @@ if (!customElements.get('variant-selects')) {
     }
 
     connectedCallback() {
-      this.updateOptions();
-      this.updateMasterId();
-      this.setDisabled();
+      if (this.updateUrl) {
+        this.updateOptions();
+        this.updateMasterId();
+        this.setDisabled();
+        this.setImageSet();
+      }
 
-      this.setImageSet();
     }
 
     onVariantChange() {
@@ -107,7 +109,6 @@ if (!customElements.get('variant-selects')) {
         this.other[0].updateMasterId();
         this.other[0].updateVariantText();
         this.other[0].setDisabled();
-        this.other[0].setImageSetMedia();
       }
     }
 
@@ -320,7 +321,6 @@ if (!customElements.get('variant-selects')) {
       if (dataSetEl) {
         this.imageSetName = dataSetEl.dataset.setName;
         this.imageSetIndex = this.querySelector('.product-form__input[data-handle="' + this.imageSetName + '"]').dataset.index;
-
         this.setImageSetMedia();
       }
     }
@@ -346,7 +346,9 @@ if (!customElements.get('variant-selects')) {
           thumb.parentElement.prepend(thumb);
         });
       }
-
+      setTimeout(() => {
+        this.productSlider.querySelector('product-slider').onPaginationResize();
+      }, 100);
     }
 
     createAvailableOptionsTree(variant_data, selected_options) {
@@ -458,9 +460,9 @@ if (!customElements.get('product-slider')) {
       // Start Pagination
       if (this.pagination) {
         this.setupPagination();
+        this.resizeObserver = new ResizeObserver(entries => this.onPaginationResize());
+        this.resizeObserver.observe(this);
         this.addEventListener('scroll', this.updatePagination.bind(this));
-        const resizeObserver = new ResizeObserver(entries => this.onPaginationResize());
-        resizeObserver.observe(this);
       }
     }
     setupProductGallery() {
@@ -563,9 +565,11 @@ if (!customElements.get('product-slider')) {
     }
     onPaginationResize() {
       this.sliderItemsToShow = Array.from(this.sliderItems).filter(element => element.clientWidth > 0);
+
       if (this.sliderItemsToShow.length < 2) return;
 
       this.sliderItemOffset = this.sliderItemsToShow[1].offsetLeft - this.sliderItemsToShow[0].offsetLeft;
+      this.updatePagination();
     }
     onPaginationButtonClick(event) {
       event.preventDefault();
@@ -583,6 +587,10 @@ if (!customElements.get('product-slider')) {
       if (this.currentPageElement) {
         this.currentPageElement.textContent = this.currentPage;
       }
+      if (this.pageTotalElement) {
+        this.pageTotalElement.textContent = this.sliderItemsToShow.length;
+      }
+
       if (this.currentPage != previousPage) {
         this.dispatchEvent(new CustomEvent('slideChanged', {
           detail: {

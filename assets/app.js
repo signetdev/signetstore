@@ -1399,7 +1399,7 @@ function addIdToRecentlyViewed(handle) {
   }
   if (window.localStorage) {
     let recentIds = window.localStorage.getItem('recently-viewed');
-    if (recentIds && typeof (recentIds) !== undefined) {
+    if (recentIds != 'undefined' && recentIds != null) {
       window.recentlyViewedIds = JSON.parse(recentIds);
     }
   }

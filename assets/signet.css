@@ -4,9 +4,19 @@
   height: 0;
 }
 
+a,breadcrumbs,
 .announcement-bar,
 #header,
 #header .full-menu,
-#header .full-menu .thb-full-menu{
+#header .full-menu .thb-full-menu,
+.collection-btn-toggle,
+#closeSideBar,#footer{
   font-family: "Archivo Narrow", sans-serif;
+}
+
+.thb-full-menu li.menu-item-has-children:hover > .sub-menu {
+  visibility: visible;
+  opacity: 1; 
+  max-height: 80svh; 
+  overflow: auto; 
 }
