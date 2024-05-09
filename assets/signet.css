@@ -68,12 +68,20 @@ a,.breadcrumbs,
   
 }
 
-
 .thb-full-menu li.menu-item-has-children:hover > .sub-menu {
   visibility: visible;
   opacity: 1; 
   max-height: 80svh; 
-  overflow: auto; 
+  overflow: auto;
+}
+
+.thb-full-menu li.menu-item-has-children:hover > .sub-menu li {
+  font-size: calc(var(--font-navigation-scale, 1));
+  text-transform: uppercase;
+  font-weight: var(--font-body-bold-weight, 600);
+  letter-spacing: .1em;
+  padding: 0;
+  margin-bottom: 10px;
 }
 
 .thb-full-menu li.menu-item-has-children {
