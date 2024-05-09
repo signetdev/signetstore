@@ -4,6 +4,10 @@
   height: 0;
 }
 
+.thb-full-menu .sub-menu ul li {
+  width: 30%;
+}
+
 a,.breadcrumbs,
 .announcement-bar,
 #header,
@@ -63,7 +67,6 @@ a,.breadcrumbs,
   }
   
 }
-
 
 
 .thb-full-menu li.menu-item-has-children:hover > .sub-menu {
