@@ -133,14 +133,18 @@ if (!customElements.get('variant-selects')) {
       if (!this.sticky) {
         window.setTimeout(() => {
           if (window.innerWidth > 1068) {
-            let header_h = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height'));
-            window.scrollTo({
-              left: 0,
-              top: (activeMedia.parentElement.offsetTop - header_h),
-              behavior: 'instant'
-            });
+            let header_h = activeMedia.parentElement.offsetTop - parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-height')),
+              scroll_obj = {
+                left: 0,
+                behavior: 'instant'
+              };
+
+            if (header_h > 0) {
+              scroll_obj.top = header_h
+            }
+            window.scrollTo(scroll_obj);
           }
-          this.productWrapper.querySelector(`#Product-Slider`).scrollTo({
+          activeMedia.parentElement.scrollTo({
             left: 0,
             behavior: 'instant'
           });

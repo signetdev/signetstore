@@ -149,11 +149,8 @@ if (!customElements.get('product-card')) {
       let image_length = this.additional_images.length;
       let images = this.additional_images;
       let nav = this.additional_images_nav;
-      let image_container = this.querySelector('.product-featured-image');
+      let image_container = this.querySelector('.product-featured-image-link');
       const mousemove = function (e) {
-        if (!e.target.parentElement.classList.contains('product-featured-image-link')) {
-          return;
-        }
         let l = e.offsetX;
         let w = this.getBoundingClientRect().width;
         let prc = l / w;
