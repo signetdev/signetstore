@@ -84,6 +84,11 @@ a,.breadcrumbs,
   margin-bottom: 10px;
 }
 
+.thb-full-menu li.menu-item-has-children:hover > .sub-menu li a {
+  font-size: 12px;
+  transition: none;
+}
+
 .thb-full-menu li.menu-item-has-children {
   position: unset;
 }
