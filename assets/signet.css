@@ -30,8 +30,8 @@ a,.breadcrumbs,
   width: 100%;
   left: 0;
 
-  flex-wrap: wrap;
-  display: flex;
+  /*flex-wrap: wrap;
+  display: flex;*/
   padding: 50px 100px;
 
   z-index: 9999;
@@ -48,7 +48,9 @@ a,.breadcrumbs,
 
 @media only screen and (min-width: 1500px) {
  .thb-full-menu li.menu-item-has-children:hover > .sub-menu:not(.mega-menu-container) li {
-    flex: 1 0 15%; 
+    flex: 1 0 15%;
+    float: left;
+    width: 20%;
   }
 
   .thb-full-menu li.menu-item-has-children:hover > .sub-menu:not(.mega-menu-container) {
@@ -56,9 +58,9 @@ a,.breadcrumbs,
     width: 100%;
     left: 0;
   
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;
     display: flex;
-    padding: 50px 100px;
+    padding: 50px 100px;*/
   
     z-index: 9999;
   
