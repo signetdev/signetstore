@@ -47,6 +47,8 @@
         assign is_disabled = block.settings.variant_is_disabled
         assign picker_type = 'dropdown'
 	      assign color_picker = true
+        assign color_picker_size = block.settings.color_picker_size | default: 'regular'
+        assign color_picker_use_variants = block.settings.color_picker_use_variants
       -%}
       <variant-selects
         id="variant-selects-{{ section.id }}"
@@ -62,8 +64,6 @@
               assign option_name = option.name | downcase | escape
               assign option_type = block.settings.picker_type
               assign picker_type = option_type
-              assign color_picker_size = block.settings.color_picker_size | default: 'regular'
-              assign color_picker_use_variants = block.settings.color_picker_use_variants
               assign swatch_count = option.values | map: 'swatch' | compact | size 
               if block.settings.color_picker
                 if option_name contains 'color' or option_name contains 'colour' or option_name contains 'couleur' or option_name contains 'farbe'

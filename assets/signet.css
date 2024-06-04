@@ -8,12 +8,18 @@
   width: 30%;
 }
 
-a,.breadcrumbs,
-.announcement-bar,
 #header,
 #header .full-menu,
 #header .full-menu .thb-full-menu,
+a,.breadcrumbs,
+.announcement-bar,
 .collection-btn-toggle,
+.product-short-description,
+.variations,
+.product-add-to-cart-container,
+.product-grid-container,
+.collection-tabs__list,
+.product-card-quickview,
 #closeSideBar,#footer{
   font-family: "Archivo Narrow", sans-serif;
 }

@@ -30,7 +30,7 @@
 -%}
 <div class="row {{ section_width }}">
 	<div class="small-12 columns">
-		<div class="promotional-banner layout--{{ image_width }} {{ split_layout }} frame-border--{{ frame_border }} section-spacing{% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}" style="--color-bg: {{ color_bg }}; --color-text: {{ color_text }}; --overlay-color-rgb: {{ overlay_color | color_extract: 'red' }}, {{ overlay_color | color_extract: 'green' }}, {{ overlay_color | color_extract: 'blue' }}; --overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }}; --solid-button-background: {{ color_text }}; --outline-button-label: {{ color_text }};--solid-button-label: {{ color_bg }};--bg-body: {{ color_bg }}">
+		<div class="promotional-banner layout--{{ image_width }} {{ split_layout }} frame-border--{{ frame_border }} section-spacing{% if disable_top_spacing %} section-spacing--disable-top{% endif %}{% if disable_bottom_spacing %} section-spacing--disable-bottom{% endif %}" style="--color-bg: {{ color_bg }}; --color-text: {{ color_text }}; --overlay-color-rgb: {{ overlay_color.rgb | replace: ' ' , ',' }}; --overlay-opacity: {{ overlay_opacity | divided_by: 100.0 }}; --solid-button-background: {{ color_text }}; --outline-button-label: {{ color_text }};--solid-button-label: {{ color_bg }};--bg-body: {{ color_bg }}">
 			<div class="promotional-banner--content {{ content_position }}">
 				<div class="promotional-banner--content-inner">
 					{%- for block in section.blocks -%}

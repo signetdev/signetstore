@@ -2,8 +2,9 @@
 	assign share_facebook = settings.social_share_facebook
 	assign share_twitter = settings.social_share_twitter
 	assign share_pinterest = settings.social_share_pinterest
+	assign share_clipboard = settings.social_share_clipboard
 -%}
-<aside class="share-article">
+<social-share class="share-article">
 	{%- if share_label -%}
 	<label>{{ 'blogs.article.share_this_article' | t }}</label>
 	{%- endif -%}
@@ -16,5 +17,11 @@
   {%- if share_pinterest -%}
   <a href="http://pinterest.com/pin/create/link/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | image_url: width: 1024, height: 1024 }}&amp;description={{ share_title | url_param_escape }}" class="pinterest social" data-pin-no-hover="true" aria-label="{{ 'social.share' | t }} {{ 'social.links.pinterest' | t }}">{% render 'svg-icons' with 'pinterest' %}</a>
   {%- endif -%}
-</aside>
+  {%- if share_clipboard -%}
+  <button class="clipboard social"><span class="clipboard--bubble">{{ 'social.copied_to_clipboard' | t }}</span>{% render 'svg-icons' with 'clipboard' %}</button>
+  {%- endif -%}
+</social-share>
 <script src="{{ 'social-share.js' | asset_url }}" defer="defer"></script>
+{%- if share_clipboard -%}
+<script src="{{ 'clipboard.min.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}

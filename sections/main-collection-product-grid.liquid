@@ -259,6 +259,47 @@
 						"info": "This will allow you to set a link to the promotion"
           },
 					{
+						"type": "header",
+						"content": "Layout"
+					},
+					{
+						"type": "select",
+						"id": "content_position",
+						"label": "Content position",
+						"options": [
+							{ "value": "top-left", "label": "Top left" },
+							{ "value": "top-center", "label": "Top center" },
+							{ "value": "top-right", "label": "Top right" },
+							{ "value": "middle-left", "label": "Middle left" },
+							{ "value": "middle-center", "label": "Middle center" },
+							{ "value": "middle-right", "label": "Middle right" },
+							{ "value": "bottom-left", "label": "Bottom left" },
+							{ "value": "bottom-center", "label": "Bottom center" },
+							{ "value": "bottom-right", "label": "Bottom right" }
+						],
+						"default": "middle-center"
+					},
+					{
+						"type": "select",
+						"id": "text_alignment",
+						"options": [
+							{
+								"value": "left",
+								"label": "Left"
+							},
+							{
+								"value": "center",
+								"label": "Center"
+							},
+							{
+								"value": "right",
+								"label": "Right"
+							}
+						],
+						"default": "center",
+						"label": "Content alignment"
+					},
+					{
 			      "type": "header",
 			      "content": "Colors"
 			    },

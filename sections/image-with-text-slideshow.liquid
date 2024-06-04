@@ -47,7 +47,7 @@
 				{% endfor %}
 			</slide-show>
 
-			<slide-show class="image-with-text-slideshow__content carousel inner-carousel {{ dots_class }}" data-dots="{{ dots }}" data-autoplay="{{ autoplay }}" data-fade="true" style="--color-bg:{{ color_bg }}; --color-text:{{ color_text }}; --color-accent: {{ color_links }}; --color-accent-rgb:  {{ color_links | color_extract: 'red' }}, {{ color_links | color_extract: 'green' }}, {{ color_links | color_extract: 'blue' }}; --dot-speed: {{ autoplay | divided_by: 1000 | append: 's' }}">
+			<slide-show class="image-with-text-slideshow__content carousel inner-carousel {{ dots_class }}" data-dots="{{ dots }}" data-autoplay="{{ autoplay }}" data-fade="true" style="--color-bg:{{ color_bg }}; --color-text:{{ color_text }}; --color-accent: {{ color_links }}; --color-accent-rgb:  {{ color_links.rgb | replace: ' ' , ',' }}; --dot-speed: {{ autoplay | divided_by: 1000 | append: 's' }}">
 				{% for block in section.blocks %}
 					<div class="image-with-text-slideshow__content-content carousel__slide {{ desktop_height }}" {{ block.shopify_attributes }}>
 						{% if block.settings.heading %}

@@ -4,7 +4,7 @@
  */
 
 if (!customElements.get('time-line')) {
- 	class Timeline extends HTMLElement {
+	class Timeline extends HTMLElement {
 		constructor() {
 			super();
 			this.id = this.dataset.id;
@@ -14,13 +14,13 @@ if (!customElements.get('time-line')) {
 			this.items = this.querySelectorAll('.timeline--slide');
 			this.labels = this.querySelectorAll('.timeline--scroll-pagination li');
 
-			if ( this.animations_enabled ) {
-				this.scrollSet = gsap.quickSetter('#time-line-progress-'+ this.id, "scaleX");
+			if (this.animations_enabled) {
+				this.scrollSet = gsap.quickSetter('#time-line-progress-' + this.id, "scaleX");
 			}
-	  }
+		}
 		connectedCallback() {
 			const _this = this;
-			if ( this.animations_enabled ) {
+			if (this.animations_enabled) {
 				_this.scroller.addEventListener('scroll', () => this.onScroll());
 			}
 
@@ -30,17 +30,17 @@ if (!customElements.get('time-line')) {
 		}
 		setLabelPosition(item) {
 			let contentWidth = this.scroller.querySelector('.timeline--scroll-inner').offsetWidth,
-					arr = Array.prototype.slice.call(this.labels),
-					i = arr.indexOf(item),
-					itemWidth = this.items[i].offsetWidth;
+				arr = Array.prototype.slice.call(this.labels),
+				i = arr.indexOf(item),
+				itemWidth = this.items[i].offsetWidth;
 
 			item.style.flex = (itemWidth / contentWidth);
 		}
 		onScroll() {
 			let scrollLeft = this.scroller.scrollLeft,
-					scrollerWidth = this.scroller.offsetWidth,
-					contentWidth = this.scroller.querySelector('.timeline--scroll-inner').offsetWidth,
-					scrollPercent = (scrollLeft) / ( contentWidth - scrollerWidth );
+				scrollerWidth = this.scroller.offsetWidth,
+				contentWidth = this.scroller.querySelector('.timeline--scroll-inner').offsetWidth,
+				scrollPercent = (scrollLeft) / (contentWidth - scrollerWidth);
 
 			this.scrollSet(scrollPercent);
 		}

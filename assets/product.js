@@ -140,7 +140,7 @@ if (!customElements.get('variant-selects')) {
               };
 
             if (header_h > 0) {
-              scroll_obj.top = header_h
+              scroll_obj.top = header_h;
             }
             window.scrollTo(scroll_obj);
           }
@@ -279,16 +279,36 @@ if (!customElements.get('variant-selects')) {
       const variant_data = this.getVariantData();
 
 
-      if (variant_data && this.currentVariant) {
-        const selected_options = this.currentVariant.options.map((value, index) => {
-          return {
-            value,
-            index: `option${index + 1}`
-          };
-        });
+      if (variant_data) {
+        let selected_options = false;
+        if (this.currentVariant) {
+          selected_options = this.currentVariant.options.map((value, index) => {
+            return {
+              value,
+              index: `option${index + 1}`
+            };
+          });
+        } else {
+          let found_option = variant_data.find(option => {
+            return option.option1 === this.options[0];
+          });
+          if (found_option) {
+            selected_options = [
+              {
+                "value": this.options[0],
+                "index": "option1"
+              },
+              {
+                "value": found_option.option2,
+                "index": "option2"
+              }
+            ];
+          } else {
+            return;
+          }
+        }
 
         const available_options = this.createAvailableOptionsTree(variant_data, selected_options);
-
 
         this.fieldsets.forEach((fieldset, i) => {
           const fieldset_options = Object.values(available_options)[i];

@@ -100,7 +100,7 @@
       display: none; }
   .testimonials__author {
     font-size: 0.875rem;
-    line-height: 1; }
+    line-height: 1.4; }
     .testimonials__author:before {
       content: "\2014";
       margin-right: 10px; }

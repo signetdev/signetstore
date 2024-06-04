@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Reformation",
     "theme_author": "Fuel Themes",
-    "theme_version": "2.7.1",
+    "theme_version": "2.8.0",
     "theme_documentation_url": "https:\/\/documentation.fuelthemes.net\/article-categories\/reformation\/",
     "theme_support_url": "https:\/\/fuelthemes.net\/contact\/"
   },
@@ -494,6 +494,12 @@
         "type": "checkbox",
         "id": "social_share_pinterest",
         "label": "Pin on Pinterest",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "social_share_clipboard",
+        "label": "Copy to clipboard",
         "default": true
       }
     ]

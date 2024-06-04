@@ -1388,11 +1388,10 @@ function addIdToRecentlyViewed(handle) {
 
     if (product) {
       handle = product.dataset.handle;
-
-      if (!handle) {
-        return;
-      }
     }
+  }
+  if (!handle) {
+    return;
   }
   if (window.localStorage) {
     let recentIds = window.localStorage.getItem('recently-viewed');

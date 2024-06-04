@@ -42,12 +42,36 @@
 				{% for block in section.blocks %}
 					{% assign mainloop = forloop %}
 					{% if block.settings.collection != blank %}
+						{%- if block.settings.enable_promotion -%}
+							{%- unless gallery_enabled -%}
+								{{- 'gallery.css' | asset_url | stylesheet_tag -}}
+								{%- assign gallery_enabled = true -%}
+							{%- endunless -%}
+              <div
+                class="promotion-column {{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}"
+                data-collection="{{ block.settings.collection.handle }}"
+              >
+                {%- render 'product-promotion', block: block -%}
+              </div>
+            {%- endif -%}
 						{%- for product in block.settings.collection.products limit: product_limit -%}
 							<div class="{{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}" data-collection="{{ block.settings.collection.handle }}">
 								{% render 'product-card', product_card_product: product %}
 							</div>
 						{%- endfor -%}
 					{% else %}
+						{%- if block.settings.enable_promotion -%}
+							{%- unless gallery_enabled -%}
+								{{- 'gallery.css' | asset_url | stylesheet_tag -}}
+								{%- assign gallery_enabled = true -%}
+							{%- endunless -%}
+              <div
+                class="promotion-column {{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}"
+                data-collection="{{ block.settings.collection.handle }}"
+              >
+                {%- render 'product-promotion', block: block -%}
+              </div>
+            {%- endif -%}
 						{%- for i in (1..product_limit) -%}
 						<div class="{{ columns_class }} columns{% if mainloop.first == true %} carousel__slide{% endif %}" data-collection="collection-{{ block.id }}">
 							{% render 'product-card' %}
@@ -156,7 +180,115 @@
             "type": "collection",
             "id": "collection",
             "label": "Collection"
-          }
+          },
+					{
+						"type": "header",
+						"content": "Promotion"
+					},
+					{
+						"type": "checkbox",
+						"id": "enable_promotion",
+						"label": "Enable promotion",
+						"default": false
+					},
+					{
+						"type": "image_picker",
+						"id": "image",
+						"label": "Image"
+					},
+					{
+						"type": "text",
+						"id": "title",
+						"default": "Promotion heading",
+						"label": "Heading"
+					},
+					{
+						"type": "textarea",
+						"id": "text",
+						"default": "Advertise a promotion or a sale",
+						"label": "Description"
+					},
+					{
+						"id": "link_label",
+						"type": "text",
+						"label": "Button label",
+						"default": "Explore",
+						"info": "Leave the label blank to hide the button."
+					},
+					{
+						"type": "select",
+						"id": "content_position",
+						"label": "Content position",
+						"options": [
+							{ "value": "top-left", "label": "Top left" },
+							{ "value": "top-center", "label": "Top center" },
+							{ "value": "top-right", "label": "Top right" },
+							{ "value": "middle-left", "label": "Middle left" },
+							{ "value": "middle-center", "label": "Middle center" },
+							{ "value": "middle-right", "label": "Middle right" },
+							{ "value": "bottom-left", "label": "Bottom left" },
+							{ "value": "bottom-center", "label": "Bottom center" },
+							{ "value": "bottom-right", "label": "Bottom right" }
+						],
+						"default": "bottom-left"
+					},
+					{
+						"type": "select",
+						"id": "text_alignment",
+						"options": [
+							{
+								"value": "left",
+								"label": "Left"
+							},
+							{
+								"value": "center",
+								"label": "Center"
+							},
+							{
+								"value": "right",
+								"label": "Right"
+							}
+						],
+						"default": "left",
+						"label": "Content alignment"
+					},
+					{
+						"id": "link",
+						"type": "url",
+						"label": "Button link"
+					},
+					{
+						"type": "checkbox",
+						"id": "use_text_button",
+						"label": "Use text button",
+						"default": false
+					},
+					{
+						"id": "block_link",
+						"type": "url",
+						"label": "Link",
+						"info": "This will allow you to set a link to the promotion"
+					},
+					{
+						"type": "header",
+						"content": "Colors"
+					},
+					{
+						"type": "color",
+						"id": "overlay_color",
+						"label": "Overlay",
+						"default": "#000000"
+					},
+					{
+						"type": "range",
+						"id": "overlay_opacity",
+						"min": 0,
+						"max": 100,
+						"step": 1,
+						"unit": "%",
+						"label": "Overlay opacity",
+						"default": 70
+					}
 				]
 			}
 		],

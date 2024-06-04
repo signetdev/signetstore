@@ -12,7 +12,7 @@
 		{%- else -%}
 			{{ 'image' | placeholder_svg_tag: 'placeholder_svg_tag' }}
 		{%- endif -%}
-		<div class="gallery__item-content content-middle-center text-center">
+		<div class="gallery__item-content content-{{ block.settings.content_position }} text-{{ block.settings.text_alignment }}">
 			<div>
 				{% if block.settings.title != blank %}
 					<h4>{{ block.settings.title }}</h4>
