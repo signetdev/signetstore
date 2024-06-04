@@ -29,6 +29,7 @@ a,.breadcrumbs,
   /*left: 50%;
   transform: translate(-50%);*/
   transition: none;
+  display: none;
 }
 
 .thb-full-menu li.menu-item-has-children:hover > .sub-menu:not(.mega-menu-container) {
@@ -43,6 +44,7 @@ a,.breadcrumbs,
   z-index: 9999;
 
   pointer-events: all;
+  display: block;
 }
 
 @media only screen and (min-width: 768px) {
@@ -69,7 +71,7 @@ a,.breadcrumbs,
     padding: 50px 100px;*/
   
     z-index: 9999;
-  
+    display: block;
     /*left: 50%;
     transform: translate(-50%);*/
   }
@@ -99,6 +101,14 @@ a,.breadcrumbs,
 
 .thb-full-menu li.menu-item-has-children {
   position: unset;
+}
+
+.thb-secondary-area .buckscc-currency-box {
+    display: flex !important;
+    line-height: 1;
+    justify-content: center;
+    align-items: center;
+    margin-left: 5%;
 }
 
 
