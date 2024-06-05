@@ -24,6 +24,16 @@ a,.breadcrumbs,
   font-family: "Archivo Narrow", sans-serif;
 }
 
+.thb-full-menu .menu-item-has-children.menu-item-has-megamenu .mega-menu-container {
+  pointer-events: none;
+  display: none;
+}
+
+.thb-full-menu .menu-item-has-children.menu-item-has-megamenu:hover .mega-menu-container {
+  pointer-events: all;
+  display: flex;
+}
+
 .thb-full-menu .sub-menu:not(.mega-menu-container) {
   pointer-events: none;
   /*left: 50%;
