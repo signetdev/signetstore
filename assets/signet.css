@@ -61,6 +61,8 @@ a,.breadcrumbs,
  .thb-full-menu li.menu-item-has-children:hover > .sub-menu:not(.mega-menu-container) li {
     flex: 1 0 25%;
     padding: 7px 0;
+    float: left;
+    width: 25%;
   } 
 }
 
