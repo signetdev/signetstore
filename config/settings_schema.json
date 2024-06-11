@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Reformation",
     "theme_author": "Fuel Themes",
-    "theme_version": "2.8.0",
+    "theme_version": "2.9.0",
     "theme_documentation_url": "https:\/\/documentation.fuelthemes.net\/article-categories\/reformation\/",
     "theme_support_url": "https:\/\/fuelthemes.net\/contact\/"
   },
@@ -557,6 +557,13 @@
       },
       {
         "type": "checkbox",
+        "id": "products_use_video",
+        "label": "Use video",
+        "default": true,
+        "info": "Use a Shopify hosted video if it is set as the first product media. Shows the MP4 video if it is the first product media. Won't work for YouTube/Vimeo."
+      },
+      {
+        "type": "checkbox",
         "id": "products_hover_images",
         "label": "Show additional images on hover",
         "default": true
@@ -594,6 +601,13 @@
         "id": "show_products_vendor",
         "label": "Show vendor",
         "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_products_subtitle",
+        "label": "Show product subtitle",
+        "default": true,
+        "info": "Uses product subtitle [metafield](https://help.shopify.com/en/manual/metafields)"
       },
       {
         "type": "checkbox",

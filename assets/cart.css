@@ -108,10 +108,11 @@
 .cart-items tfoot .thb-cart-form--cart-collaterals .additional-checkout-buttons {
   margin-top: 10px; }
 
-.cart-items tfoot .thb-cart-form--cart-collaterals-terms {
+.cart-items .cart-drawer--terms {
+  display: block;
   margin-bottom: 15px;
   text-align: left; }
-  .cart-items tfoot .thb-cart-form--cart-collaterals-terms a {
+  .cart-items .cart-drawer--terms a {
     color: var(--color-accent);
     text-decoration: underline;
     text-underline-offset: 2px; }

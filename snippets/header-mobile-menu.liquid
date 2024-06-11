@@ -42,7 +42,7 @@
 							<summary class="parent-link">{{ link.title }}<span>{%- render 'svg-icons' with 'thb-mobile-menu-forward' -%}</span></summary>
 							<ul class="sub-menu">
 								<li class="parent-link-back">
-									<button><span>{%- render 'svg-icons' with 'thb-mobile-menu-back' -%}</span> {{ link.title }}</button>
+									<button class="parent-link-back--button"><span>{%- render 'svg-icons' with 'thb-mobile-menu-back' -%}</span> {{ link.title }}</button>
 								</li>
 				        {%- for l in link.links -%}
 									{%- liquid
@@ -57,7 +57,7 @@
 											<summary>{{ l.title }}<span>{%- render 'svg-icons' with 'thb-mobile-menu-forward' -%}</span></summary>
 											<ul class="sub-menu" tabindex="-1">
 												<li class="parent-link-back">
-													<button><span>{%- render 'svg-icons' with 'thb-mobile-menu-back' -%}</span> {{ l.title }}</button>
+													<button class="parent-link-back--button"><span>{%- render 'svg-icons' with 'thb-mobile-menu-back' -%}</span> {{ l.title }}</button>
 												</li>
 												{%- for sub_link in l.links -%}
 													{%- liquid

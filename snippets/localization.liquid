@@ -1,5 +1,5 @@
 {%- if show_language_switcher or show_currency_switcher -%}
-<div class="thb-localization-forms {{ class }}">
+<localization-form class="thb-localization-forms {{ class }}">
 	{%- form 'localization', id: id -%}
 		{%- if show_language_switcher -%}
 		<div class="select">
@@ -27,5 +27,6 @@
 			<button class="text-button">{{ 'localization.update_country' | t }}</button>
 		</noscript>
 	{%- endform -%}
-</div>
+</localization-form>
+<script src="{{ 'localization.js' | asset_url }}" defer="defer"></script>
 {%- endif -%}

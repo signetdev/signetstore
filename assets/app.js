@@ -521,181 +521,8 @@ if (!customElements.get('product-card')) {
   }
   customElements.define('product-card', ProductCard);
 }
-/**
- *  @class
- *  @function Header
- */
-class Header {
-  constructor() {
-    const header = document.querySelector('.header-section'),
-      header_main = document.getElementById('header'),
-      menu = document.getElementById('mobile-menu'),
-      toggle = document.querySelector('.mobile-toggle-wrapper'),
-      setHeaderOffset = this.setHeaderOffset,
-      setAnnouncementHeight = this.setAnnouncementHeight,
-      setHeaderHeight = this.setHeaderHeight;
 
-    if (!header_main) {
-      return;
-    }
-    document.addEventListener('keyup', (e) => {
-      if (e.code) {
-        if (e.code.toUpperCase() === 'ESCAPE') {
-          toggle.removeAttribute('open');
-          toggle.classList.remove('active');
-        }
-      }
-    });
-    toggle.querySelector('.mobile-toggle').addEventListener('click', (e) => {
-      setAnnouncementHeight(header);
-      if (toggle.classList.contains('active')) {
-        e.preventDefault();
-        document.body.classList.remove('overflow-hidden');
-        toggle.classList.remove('active');
-        this.closeAnimation(toggle);
 
-      } else {
-        document.body.classList.add('overflow-hidden');
-        setTimeout(() => {
-          toggle.classList.add('active');
-        });
-      }
-      window.dispatchEvent(new Event('resize.resize-select'));
-    });
-
-    // Mobile Menu offset
-    window.addEventListener('scroll', function () {
-      setHeaderOffset(header);
-      setHeaderHeight(header_main);
-      // Sticky Header Class
-      if (header_main.classList.contains('header-sticky--active')) {
-        let offset = parseInt(header_main.getBoundingClientRect().top, 10) + document.documentElement.scrollTop;
-
-        header_main.classList.toggle('is-sticky', window.scrollY >= offset && window.scrollY > 0);
-      }
-
-    }, {
-      passive: true
-    });
-    window.dispatchEvent(new Event('scroll'));
-
-    if (document.getElementById('shopify-section-announcement-bar')) {
-      const a_bar = document.getElementById('shopify-section-announcement-bar');
-      window.addEventListener('resize', function () {
-        setAnnouncementHeight(a_bar);
-      }, {
-        passive: true
-      });
-      window.dispatchEvent(new Event('resize'));
-    }
-    // Buttons.
-    menu.querySelectorAll('summary').forEach(summary => summary.addEventListener('click', this.onSummaryClick.bind(this)));
-    menu.querySelectorAll('button').forEach(button => button.addEventListener('click', this.onCloseButtonClick.bind(this)));
-  }
-  setAnnouncementHeight(a_bar) {
-    let h = a_bar.clientHeight;
-    document.documentElement.style.setProperty('--announcement-height', h + 'px');
-  }
-  setHeaderOffset(header) {
-    let h = header.getBoundingClientRect().top;
-    document.documentElement.style.setProperty('--header-offset', h + 'px');
-  }
-  setHeaderHeight(header) {
-    let h = header.clientHeight;
-    document.documentElement.style.setProperty('--header-height', h + 'px');
-  }
-  onSummaryClick(event) {
-    const summaryElement = event.currentTarget;
-    const detailsElement = summaryElement.parentNode;
-    const parentMenuElement = detailsElement.closest('.link-container');
-    const isOpen = detailsElement.hasAttribute('open');
-
-    setTimeout(() => {
-      detailsElement.classList.add('menu-opening');
-      parentMenuElement && parentMenuElement.classList.add('submenu-open');
-    }, 100);
-  }
-  onCloseButtonClick(event) {
-    event.preventDefault();
-    const detailsElement = event.currentTarget.closest('details');
-    this.closeSubmenu(detailsElement);
-  }
-  closeSubmenu(detailsElement) {
-    detailsElement.classList.remove('menu-opening');
-    this.closeAnimation(detailsElement);
-  }
-  closeAnimation(detailsElement) {
-    let animationStart;
-
-    const handleAnimation = (time) => {
-      if (animationStart === undefined) {
-        animationStart = time;
-      }
-
-      const elapsedTime = time - animationStart;
-
-      if (elapsedTime < 400) {
-        window.requestAnimationFrame(handleAnimation);
-      } else {
-        detailsElement.removeAttribute('open');
-        detailsElement.querySelectorAll('details').forEach((details) => {
-          details.removeAttribute('open');
-          details.classList.remove('menu-opening');
-          details.classList.remove('submenu-open');
-        });
-      }
-    };
-
-    window.requestAnimationFrame(handleAnimation);
-  }
-}
-/**
- *  @class
- *  @function FullMenu
- */
-if (!customElements.get('full-menu')) {
-  class FullMenu extends HTMLElement {
-    constructor() {
-      super();
-    }
-    connectedCallback() {
-      this.submenus = this.querySelectorAll('.thb-full-menu>.menu-item-has-children:not(.menu-item-has-megamenu)>.sub-menu');
-
-      if (!this.submenus.length) {
-        return;
-      }
-      const _this = this;
-      // resize on initial load
-      window.addEventListener('resize', debounce(function () {
-        _this.resizeSubMenus();
-      }, 100));
-
-      window.dispatchEvent(new Event('resize'));
-
-      document.fonts.ready.then(function () {
-        _this.resizeSubMenus();
-      });
-
-    }
-    resizeSubMenus() {
-      this.submenus.forEach((submenu) => {
-        let sub_submenus = submenu.querySelectorAll(':scope >.menu-item-has-children>.sub-menu');
-
-        sub_submenus.forEach((sub_submenu) => {
-          let w = sub_submenu.offsetWidth,
-            l = sub_submenu.parentElement.parentElement.getBoundingClientRect().left + sub_submenu.parentElement.parentElement.clientWidth + 10,
-            total = w + l;
-          if (total > document.body.clientWidth) {
-            sub_submenu.parentElement.classList.add('left-submenu');
-          } else if (sub_submenu.parentElement.classList.contains('left-submenu')) {
-            sub_submenu.parentElement.classList.remove('left-submenu');
-          }
-        });
-      });
-    }
-  }
-  customElements.define('full-menu', FullMenu);
-}
 /**
  *  @class
  *  @function PanelClose
@@ -853,9 +680,6 @@ class CartDrawer {
     this.notesToggle();
     this.removeProductEvent();
     this.updateFreeShipping();
-
-    // Terms checkbox
-    this.termsCheckbox();
   }
   onChange(event) {
     if (event.target.classList.contains('qty')) {
@@ -889,21 +713,6 @@ class CartDrawer {
     return new DOMParser()
       .parseFromString(html, 'text/html')
       .querySelector(selector).innerHTML;
-  }
-  termsCheckbox() {
-    let terms_checkbox = this.container.querySelector('#CartDrawerTerms'),
-      checkout_button = this.container.querySelector('.button.checkout');
-
-    if (terms_checkbox && checkout_button) {
-      terms_checkbox.setCustomValidity(theme.strings.requiresTerms);
-      checkout_button.addEventListener('click', function (e) {
-        if (!terms_checkbox.checked) {
-          terms_checkbox.reportValidity();
-          terms_checkbox.focus();
-          e.preventDefault();
-        }
-      });
-    }
   }
   notesToggle() {
     let notes_toggle = document.getElementById('order-note-toggle');
@@ -997,7 +806,6 @@ class CartDrawer {
 
         this.removeProductEvent();
         this.notesToggle();
-        this.termsCheckbox();
         this.updateFreeShipping();
         dispatchCustomEvent('line-item:change:end', {
           quantity: quantity,
@@ -1029,29 +837,10 @@ class CartDrawer {
 
         this.removeProductEvent();
         this.notesToggle();
-        this.termsCheckbox();
         this.updateFreeShipping();
       });
   }
 }
-
-/**
- *  @class
- *  @function Localization
- */
-class Localization {
-  constructor() {
-    let _this = this;
-    // resize on initial load
-    document.querySelectorAll('.thb-localization-forms').forEach((localization) => {
-      localization.addEventListener('change', (e) => {
-        localization.querySelector('form').submit();
-      });
-    });
-  }
-}
-
-
 
 /**
  *  @class
@@ -1415,15 +1204,8 @@ function addIdToRecentlyViewed(handle) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-
-  if (typeof Localization !== 'undefined') {
-    new Localization();
-  }
   if (typeof CartDrawer !== 'undefined') {
     new CartDrawer();
-  }
-  if (typeof Header !== 'undefined') {
-    new Header();
   }
   if (typeof FooterMenuToggle !== 'undefined') {
     new FooterMenuToggle();

@@ -199,16 +199,7 @@
 									</table>
 								{%- endif -%}
 								{% if settings.cart_terms_conditions_enable %}
-			            <div class="thb-cart-form--cart-collaterals-terms">
-			              <input type="checkbox" id="CartTerms" required>
-			              <label for="CartTerms">
-			                {% if settings.cart_terms_conditions_page != blank %}
-			                  {{ 'sections.cart.terms_html' | t: url: settings.cart_terms_conditions_page.url }}
-			                {% else %}
-			                  {{ 'sections.cart.terms' | t }}
-			                {% endif %}
-			              </label>
-			            </div>
+			            {% render 'cart-terms' %}
 			          {% endif %}
 								<div class="proceed-to-checkout" data-additional-checkout="{{ additional_checkout_buttons }}">
 									<button type="submit" name="checkout" class="checkout-button button full"><span>{{ 'sections.cart.checkout' | t }}  • {% if settings.currency_code_enabled %}{{ cart.total_price | money_with_currency }}{% else %}{{ cart.total_price | money }}{% endif %}</span></button>

@@ -39,8 +39,6 @@ class Cart {
     });
 
     this.container.addEventListener('change', this.debouncedOnChange.bind(this));
-
-    this.termsCheckbox();
   }
   getSectionsToRender() {
     return [{
@@ -141,21 +139,6 @@ class Cart {
         this.container.classList.remove('cart-disabled');
       });
   }
-  termsCheckbox() {
-    let terms_checkbox = this.container.querySelector('#CartTerms'),
-      checkout_button = this.container.querySelector('.button.checkout-button');
-
-    if (terms_checkbox && checkout_button) {
-      terms_checkbox.setCustomValidity(theme.strings.requiresTerms);
-      checkout_button.addEventListener('click', function (e) {
-        if (!terms_checkbox.checked) {
-          terms_checkbox.reportValidity();
-          terms_checkbox.focus();
-          e.preventDefault();
-        }
-      });
-    }
-  }
   removeProductEvent() {
     let removes = this.container.querySelectorAll('.remove');
 
@@ -184,7 +167,6 @@ class Cart {
       if (line && this.container.querySelector(`#CartItem-${line}`)) {
         this.container.querySelector(`#CartItem-${line}`).classList.remove('loading');
       }
-      this.termsCheckbox();
     }));
   }
 }

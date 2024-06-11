@@ -229,6 +229,7 @@
 
 {%- assign side_panels = section.blocks | where: "type", "side_panel" -%}
 {%- if side_panels.size > 0 -%}
+<script src="{{ 'side-panel-links.js' | asset_url }}" defer="defer"></script>
 <div class="side-panel product-information-drawer" id="Product-Information-Drawer" tabindex="-1">
 	<div class="side-panel-inner">
 		<div class="side-panel-header">

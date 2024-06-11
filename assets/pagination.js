@@ -40,7 +40,7 @@ if (!customElements.get('pagination')) {
     }
     loadMore() {
       let base = this;
-      this.button.addEventListener('click', function() {
+      this.button.addEventListener('click', function () {
         base.loadProducts();
         this.blur();
         return false;
@@ -48,7 +48,7 @@ if (!customElements.get('pagination')) {
     }
     infinite() {
       let base = this;
-      base.observer = new IntersectionObserver(function(entries) {
+      base.observer = new IntersectionObserver(function (entries) {
         if (entries[0].intersectionRatio === 1) {
           base.loadProducts();
         }
@@ -94,6 +94,9 @@ if (!customElements.get('pagination')) {
 
       for (var i = 0; i < products.length; i++) {
         this.grid.appendChild(products[i]);
+        products[i].querySelectorAll('.lazyload').forEach((image) => {
+          lazySizes.loader.unveil(image);
+        });
       }
       if (this.animations_enabled) {
         gsap.set(products, {
@@ -105,7 +108,7 @@ if (!customElements.get('pagination')) {
           y: 0,
           opacity: 1,
           stagger: 0.05,
-          onComplete: function() {
+          onComplete: function () {
             base.removeAttribute('loading');
           }
         });

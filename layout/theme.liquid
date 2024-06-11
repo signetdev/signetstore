@@ -9,7 +9,7 @@
 {%- endcapture -%}
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ dir }}">
 <head>
-	<meta name="google-site-verification" content="Je0qT6MukQjkXjrx8nhYzkF9zAIeZv6kd5kiXsdV-IE" />
+    <meta name="google-site-verification" content="Je0qT6MukQjkXjrx8nhYzkF9zAIeZv6kd5kiXsdV-IE" />
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
@@ -108,6 +108,7 @@
 	{% endif %}
 	{{ 'slideshow.js' | asset_url | script_tag }}
 	{{ 'app.js' | asset_url | script_tag }}
+
 	{%- liquid
 		assign add_product_js = false
 		if settings.enable_quick_view or settings.enable_quick_add

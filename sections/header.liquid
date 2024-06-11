@@ -10,7 +10,7 @@
 		assign transparent_header = section.settings.transparent_header
 	endif
 -%}
-<header id="header" class="header {{ style }} {{ header_shadow }} transparent--{{ transparent_header }} {% if sticky_header %}header-sticky--active{%- endif -%}">
+<theme-header id="header" class="header {{ style }} {{ header_shadow }} transparent--{{ transparent_header }} {% if sticky_header %}header-sticky--active{%- endif -%}">
 	<div class="row expanded">
 		<div class="small-12 columns">
 			{%- case style -%}
@@ -36,7 +36,8 @@
 		}
 		{%- endunless -%}
 	{%- endstyle -%}
-</header>
+</theme-header>
+{{- 'header.js' | asset_url | script_tag -}}
 
 <script type="application/ld+json">
   {

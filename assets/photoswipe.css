@@ -183,7 +183,7 @@
   overflow: hidden;
   text-align: center;
   background: rgba(var(--bg-body-rgb), 0.8); }
-  .pswp__caption--fake {
+  .pswp__caption--fake, .pswp__caption--empty {
     display: none; }
   .pswp__caption__center {
     padding: 10px;

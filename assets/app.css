@@ -2036,6 +2036,7 @@ h6,
   width: 100%; }
 
 .header {
+  display: block;
   border-bottom: 1px solid var(--color-header-border, var(--color-border));
   position: relative;
   background: var(--color-header-bg, #fff);
@@ -2557,6 +2558,7 @@ h6,
 
 
 .thb-localization-forms {
+  display: block;
   text-align: right; }
   .thb-localization-forms .shopify-localization-form {
     display: inline-flex; }
@@ -3527,9 +3529,9 @@ select {
       margin-bottom: 45px; }
     .cart-drawer__empty-cart + .cart-drawer--recommendations--container {
       display: none; }
-  .cart-drawer-terms {
+  .cart-drawer--terms {
     margin-bottom: 15px; }
-    .cart-drawer-terms a {
+    .cart-drawer--terms a {
       color: var(--color-accent);
       text-decoration: underline;
       text-underline-offset: 2px; }
