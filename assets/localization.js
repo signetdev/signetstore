@@ -7,7 +7,7 @@ if (!customElements.get('localization-form')) {
     constructor() {
       super();
       this.form = this.querySelector('form');
-      this.inputs = this.form.querySelectorAll('input[name="locale_code"], input[name="country_code"]');
+      this.inputs = this.form.querySelectorAll('select[name="locale_code"], select[name="country_code"]');
       this.debouncedOnSubmit = debounce((event) => {
         this.onSubmitHandler(event);
       }, 200);

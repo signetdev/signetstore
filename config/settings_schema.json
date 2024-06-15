@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Reformation",
     "theme_author": "Fuel Themes",
-    "theme_version": "2.9.0",
+    "theme_version": "3.0.0",
     "theme_documentation_url": "https:\/\/documentation.fuelthemes.net\/article-categories\/reformation\/",
     "theme_support_url": "https:\/\/fuelthemes.net\/contact\/"
   },
@@ -911,11 +911,33 @@
     "name": "Advanced",
     "settings": [
       {
+        "type": "header",
+        "content": "Speed"
+      },
+      {
+        "type": "checkbox",
+        "id": "preload_links",
+        "label": "Preload links on hover",
+        "info": "This should increase the perceived loading speed of pages.",
+        "default": true
+      },
+      {
         "type": "checkbox",
         "id": "lazy_loading",
         "label": "Enable lazy loading",
         "info": "Uses Low Quality Image Placeholders (LQIP) to improve page loading time.",
         "default": true
+      },
+      {
+        "type": "header",
+        "content": "Custom HTML"
+      },
+      {
+        "type": "textarea",
+        "id": "custom_html_head",
+        "label": "HTML for <head> tag",
+        "placeholder": "<meta name='google-site-verification' content=''/>",
+        "info": "Placed at the end of the head tag. Included on all theme pages - this does not include the checkout."
       },
       {
         "type": "header",

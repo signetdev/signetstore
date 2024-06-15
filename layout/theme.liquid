@@ -10,7 +10,7 @@
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ dir }}">
 <head>
     <meta name="google-site-verification" content="Je0qT6MukQjkXjrx8nhYzkF9zAIeZv6kd5kiXsdV-IE" />
-	<meta name="p:domain_verify" content="3f7b2263ac5a256639ee486cb321bfeb"/>
+    <meta name="p:domain_verify" content="3f7b2263ac5a256639ee486cb321bfeb"/>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover">
@@ -38,9 +38,9 @@
 	{% render 'social-meta-tags' %}
 
 	{{ 'app.css' | asset_url | stylesheet_tag }}
-
+  
     {{ 'signet.css' | asset_url | stylesheet_tag }}
-
+  
 	{% render 'head-variables' %}
 
 	<script>
@@ -78,6 +78,7 @@
 	{{ content_for_header }} <!-- Header hook for plugins -->
 
 	<script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+	{{ settings.custom_html_head }}
 </head>
 <body class="animations-{{ settings.animations }} button-uppercase-{{ settings.button_uppercase }} navigation-uppercase-{{ settings.navigation_uppercase }} product-title-uppercase-{{ settings.product_title_uppercase }}{% if customer %} customer-logged-in{% endif %} template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }} template-{{ template | replace: '.', '-' | handle }}">
 	<a class="screen-reader-shortcut" href="#main-content">{{ 'accessibility.skip_to_text' | t }}</a>
@@ -109,7 +110,6 @@
 	{% endif %}
 	{{ 'slideshow.js' | asset_url | script_tag }}
 	{{ 'app.js' | asset_url | script_tag }}
-
 	{%- liquid
 		assign add_product_js = false
 		if settings.enable_quick_view or settings.enable_quick_add
@@ -132,5 +132,11 @@
 	<script src="{{ 'product-recommendations.js' | asset_url }}" defer="defer"></script>
 	{%- endif -%}
 	{% render 'back-to-top' %}
+
+	{%- if settings.preload_links -%}
+		{%- unless request.design_mode -%}
+		<script type="module" src="{{ 'instant-page.js' | asset_url }}" defer="defer"></script>
+		{%- endunless -%}
+	{%- endif -%}
   </body>
 </html>
