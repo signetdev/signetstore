@@ -123,4 +123,11 @@ a,.breadcrumbs,
     margin-left: 5%;
 }
 
+.hxoSelectTheme.mobile_bottom_left {
+  z-index: 9;
+}
+
+.product-add-to-cart-sticky.sticky--visible {
+  z-index: 100;
+}
 
