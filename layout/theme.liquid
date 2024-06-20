@@ -110,6 +110,7 @@
 	{% endif %}
 	{{ 'slideshow.js' | asset_url | script_tag }}
 	{{ 'app.js' | asset_url | script_tag }}
+	{{ 'signet.js' | asset_url | script_tag }}
 	{%- liquid
 		assign add_product_js = false
 		if settings.enable_quick_view or settings.enable_quick_add
